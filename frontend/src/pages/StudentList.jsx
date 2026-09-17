@@ -29,7 +29,12 @@ function StudentList() {
       setShowForm(false)
       loadStudents()
     } catch (err) {
-      setError('Could not add student. Check that the email is unique and all fields are valid.')
+      const errorMsg =
+        err.response?.data?.email?.[0] ||
+        err.response?.data?.detail ||
+        err.message ||
+        'Could not add student. Check that the email is unique and all fields are valid.'
+      setError(errorMsg)
     }
   }
 
